@@ -1,6 +1,7 @@
 package com.example.myapplication.auth
 
 import com.example.myapplication.auth.model.User
+import kotlin.math.log
 
 object UserRepository {
     private var user = User("user", "123456")
@@ -10,6 +11,8 @@ object UserRepository {
     }
 
     fun checkUser(user: User): Boolean {
-        return this.user == user
+        val loginCondition = user.login == this.user.login
+        var passwordCondition = user.password == this.user.password
+        return loginCondition && passwordCondition
     }
 }

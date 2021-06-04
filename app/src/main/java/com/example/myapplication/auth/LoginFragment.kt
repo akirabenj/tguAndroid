@@ -29,25 +29,25 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        loginText = root.findViewById(R.id.loginText)
-        passwordText = root.findViewById(R.id.passwordText)
-        loginButton = root.findViewById(R.id.loginButton)
-        registerButton = root.findViewById(R.id.registerButton)
+        val root = inflater.inflate(R.layout.fragment_login, container, false)
+
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        loginButton = view.findViewById(R.id.loginButton);
+        loginText = view.findViewById(R.id.loginText)
+        passwordText = view.findViewById(R.id.passwordText)
+        registerButton = view.findViewById(R.id.registerButton)
 
         loginButton?.setOnClickListener {
             val infoArray = readInfo()
             if (authController.signIn(infoArray[0], infoArray[1])) {
-                Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(requireContext(), "Fail", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), "Fail", Toast.LENGTH_LONG).show()
             }
         }
 
