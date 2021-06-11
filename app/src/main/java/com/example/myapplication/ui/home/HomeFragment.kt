@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
@@ -12,9 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 
-class
-
-
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
@@ -22,6 +20,8 @@ class HomeFragment : Fragment() {
     private var button: Button? = null
     private var editText: TextView? = null
     private var listView: ListView? = null
+    private var productList = arrayListOf<String>()
+    private lateinit var adapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,5 +43,17 @@ class HomeFragment : Fragment() {
         button = view.findViewById(R.id.button2)
         editText = view.findViewById(R.id.productText)
         listView = view.findViewById(R.id.productList)
+        adapter = ArrayAdapter(requireContext(), R.layout.list_item, productList)
+        listView?.adapter = adapter
+
+        button?.setOnClickListener {
+            addProduct()
+        }
+    }
+
+    private fun addProduct() {
+        val product = editText?.text.toString()
+        productList.add(product)
+        adapter.notifyDataSetChanged()
     }
 }
