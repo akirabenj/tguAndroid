@@ -19,7 +19,7 @@ class LoginFragment : Fragment() {
     private var passwordText: TextView? = null
     private var loginButton: Button? = null
     private var registerButton: Button? = null
-    private val authController = AuthController()
+    private var authController: AuthController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +31,7 @@ class LoginFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_login, container, false)
 
+        authController = AuthController()
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -44,8 +45,9 @@ class LoginFragment : Fragment() {
 
         loginButton?.setOnClickListener {
             val infoArray = readInfo()
-            if (authController.signIn(infoArray[0], infoArray[1])) {
-                Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
+            if (authController!!.signIn(infoArray[0], infoArray[1])) {
+                val navigationController = findNavController()
+                navigationController.navigate(R.id.loginToMain)
             } else {
                 Toast.makeText(requireContext(), "Fail", Toast.LENGTH_LONG).show()
             }

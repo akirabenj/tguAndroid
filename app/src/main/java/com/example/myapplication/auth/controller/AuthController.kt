@@ -1,4 +1,5 @@
 package com.example.myapplication.auth.controller
+import android.content.Context
 import com.example.myapplication.auth.UserRepository
 import com.example.myapplication.auth.model.User
 
@@ -7,8 +8,7 @@ interface IAuth {
     fun signUp(login: String, password: String): Boolean
 }
 
-class AuthController: IAuth {
-
+class AuthController(): IAuth {
     //ЛОГИН
     override fun signIn(login: String, password: String): Boolean {
         val user = User(login, password)
